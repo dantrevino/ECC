@@ -4,9 +4,206 @@
     {
       "id": "rules-core",
       "kind": "rules",
-      "description": "Shared and language rules for supported harness targets.",
+      "description": "Shared and non-TS-framework language rules for supported harness targets. TypeScript-framework rules (typescript, react, react-native, vue, nuxt, angular, arkts) are separate modules so a project can install only the frameworks it uses.",
       "paths": [
-        "rules"
+        "rules/common",
+        "rules/web",
+        "rules/python",
+        "rules/golang",
+        "rules/java",
+        "rules/kotlin",
+        "rules/swift",
+        "rules/csharp",
+        "rules/fsharp",
+        "rules/cpp",
+        "rules/php",
+        "rules/perl",
+        "rules/ruby",
+        "rules/rust",
+        "rules/dart",
+        "rules/README.md"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-typescript",
+      "kind": "rules",
+      "description": "TypeScript/JavaScript coding-style rules, shared by every TS-framework rule module.",
+      "paths": [
+        "rules/typescript"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-react",
+      "kind": "rules",
+      "description": "React-specific coding, hooks, patterns, security, and testing rules.",
+      "paths": [
+        "rules/react"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-react-native",
+      "kind": "rules",
+      "description": "React Native coding, accessibility, performance, and production-readiness rules.",
+      "paths": [
+        "rules/react-native"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-vue",
+      "kind": "rules",
+      "description": "Vue coding-style, hooks, and patterns rules.",
+      "paths": [
+        "rules/vue"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-nuxt",
+      "kind": "rules",
+      "description": "Nuxt-specific coding-style rules.",
+      "paths": [
+        "rules/nuxt"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-angular",
+      "kind": "rules",
+      "description": "Angular coding, hooks, patterns, security, and testing rules.",
+      "paths": [
+        "rules/angular"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed",
+        "hermes",
+        "openclaw",
+        "kimi",
+        "adal"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-arkts",
+      "kind": "rules",
+      "description": "ArkTS/HarmonyOS coding, hooks, patterns, security, and testing rules.",
+      "paths": [
+        "rules/arkts"
       ],
       "targets": [
         "claude",

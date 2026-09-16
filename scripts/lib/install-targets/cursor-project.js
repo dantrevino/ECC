@@ -92,7 +92,7 @@ module.exports = createInstallTargetAdapter({
           return 0;
         }
 
-        if (value === 'rules') {
+        if (value === 'rules' || value.startsWith('rules/')) {
           return 1;
         }
 
@@ -141,7 +141,7 @@ module.exports = createInstallTargetAdapter({
         return [];
       }
 
-      if (sourceRelativePath === 'rules') {
+      if (sourceRelativePath === 'rules' || sourceRelativePath.startsWith('rules/')) {
         return takeUniqueOperations(createFlatRuleOperations({
           moduleId: module.id,
           repoRoot,

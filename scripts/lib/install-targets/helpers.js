@@ -238,11 +238,36 @@ function createFlatFileOperations({
   sourceRelativePath,
   destinationDir,
   destinationNameTransform,
+  topLevelFileNamespace,
 }) {
   const normalizedSourcePath = normalizeRelativePath(sourceRelativePath);
   const sourceRoot = path.join(repoRoot || '', normalizedSourcePath);
 
-  if (!repoRoot || !fs.existsSync(sourceRoot) || !fs.statSync(sourceRoot).isDirectory()) {
+  if (!repoRoot || !fs.existsSync(sourceRoot)) {
+    return [];
+  }
+
+  const sourceStat = fs.statSync(sourceRoot);
+  if (sourceStat.isFile()) {
+    // A module path can point at a single loose file (e.g. rules/README.md)
+    // rather than a directory to flatten; copy it through unchanged.
+    const fileName = path.basename(normalizedSourcePath);
+    const defaultFileName = topLevelFileNamespace ? `${topLevelFileNamespace}-${fileName}` : fileName;
+    const destinationFileName = typeof destinationNameTransform === 'function'
+      ? destinationNameTransform(defaultFileName, normalizedSourcePath)
+      : defaultFileName;
+    if (!destinationFileName) {
+      return [];
+    }
+    return [createManagedOperation({
+      moduleId,
+      sourceRelativePath: normalizedSourcePath,
+      destinationPath: path.join(destinationDir, destinationFileName),
+      strategy: 'flatten-copy',
+    })];
+  }
+
+  if (!sourceStat.isDirectory()) {
     return [];
   }
 
@@ -275,9 +300,18 @@ function createFlatFileOperations({
       }
     } else if (entry.isFile()) {
       const sourceRelativeFile = path.join(normalizedSourcePath, entry.name);
-      const destinationFileName = typeof destinationNameTransform === 'function'
-        ? destinationNameTransform(entry.name, sourceRelativeFile)
+      // A file directly under sourceRelativePath has no subdirectory to draw a
+      // collision-avoiding namespace from (unlike the directory branch above),
+      // so a caller flattening a single already-namespaced module path (e.g.
+      // rules/typescript, rather than the whole rules/ tree) supplies one
+      // explicitly to keep e.g. typescript-coding-style.md vs react-coding-style.md
+      // distinct in the flat destination directory.
+      const defaultFileName = topLevelFileNamespace
+        ? `${topLevelFileNamespace}-${entry.name}`
         : entry.name;
+      const destinationFileName = typeof destinationNameTransform === 'function'
+        ? destinationNameTransform(defaultFileName, sourceRelativeFile)
+        : defaultFileName;
       if (!destinationFileName) {
         continue;
       }
@@ -294,7 +328,25 @@ function createFlatFileOperations({
 }
 
 function createFlatRuleOperations(options) {
-  return createFlatFileOperations(options);
+  const normalizedSourcePath = normalizeRelativePath(options.sourceRelativePath);
+  // A per-language rules module directory (rules/typescript, rules/react, ...)
+  // flattens the same way the whole rules/ tree always has: prefixed by its
+  // folder name, so splitting rules-core into per-language modules does not
+  // change any installed file name or introduce collisions between them. A
+  // loose file module path (rules/README.md) has no such folder to draw a
+  // namespace from, so it is left unprefixed exactly as before the split.
+  let topLevelFileNamespace;
+  if (normalizedSourcePath.startsWith('rules/') && options.repoRoot) {
+    const sourceRoot = path.join(options.repoRoot, normalizedSourcePath);
+    try {
+      if (fs.statSync(sourceRoot).isDirectory()) {
+        topLevelFileNamespace = normalizedSourcePath.slice('rules/'.length);
+      }
+    } catch (_error) {
+      // A missing source path is reported by createFlatFileOperations itself.
+    }
+  }
+  return createFlatFileOperations({ ...options, topLevelFileNamespace });
 }
 
 function createInstallTargetAdapter(config) {
