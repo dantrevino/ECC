@@ -1374,6 +1374,33 @@
       "defaultInstall": false,
       "cost": "heavy",
       "stability": "stable"
+    },
+    {
+      "id": "boom-project-helpers",
+      "kind": "skills",
+      "description": "Optional Boom project conventions and reusable Vue/Quasar, Appwrite, and Stacks/Clarity helpers.",
+      "paths": [
+        "skills/vue-quasar-patterns",
+        "skills/appwrite-patterns",
+        "skills/stacks-clarity",
+        "skills/boom-project"
+      ],
+      "targets": [
+        "claude",
+        "claude-project",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy",
+        "joycode",
+        "qwen",
+        "zed"
+      ],
+      "dependencies": [],
+      "defaultInstall": false,
+      "cost": "light",
+      "stability": "stable"
     }
   ]
 }

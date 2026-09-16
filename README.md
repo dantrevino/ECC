@@ -136,12 +136,12 @@ Instead of rebuilding that process in every prompt, you install it once and make
 
 ECC is MIT-licensed open source. It works best with Claude Code today, has a supported Codex sync path, and provides capability-limited adapters for Cursor, OpenCode, Gemini, Zed, GitHub Copilot, Antigravity, Qwen, and other harnesses. See the [support status matrix](#platform-support) before assuming feature parity.
 
-Access to 68 agents, 292 skills, and 94 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning. The agents are specialized for planning, review, build repair, security, architecture, and domain work.
+Access to 68 agents, 296 skills, and 94 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning. The agents are specialized for planning, review, build repair, security, architecture, and domain work.
 
 | Included         |       Count | What it gives you                                                                    |
 | ---------------- | ----------: | ------------------------------------------------------------------------------------ |
 | Agents           |   68 agents | Planning, review, build repair, security, architecture, and domain work              |
-| Skills           |  292 skills | TDD, research, security, docs, frontend, data, ML, operations, and more              |
+| Skills           |  296 skills | TDD, research, security, docs, frontend, data, ML, operations, and more              |
 | Commands         | 94 commands | Convenient entry points while ECC moves to a skills-first surface                    |
 | Hooks and memory |     Runtime | Enforcement, session summaries, continuous learning, instincts, and context controls |
 | Rules            |   Selective | Always-loaded standards you choose by language or project                            |
@@ -1075,6 +1075,36 @@ Skills are the primary workflow surface. They can be invoked directly, suggested
 4. Refactor (IMPROVE)
 5. Verify 80%+ coverage
 ```
+
+#### Optional Boom project helpers
+
+The `boom-project-helpers` module adds project-derived guidance through the
+existing skill system:
+
+| Skill | Scope |
+| --- | --- |
+| [vue-quasar-patterns](skills/vue-quasar-patterns/SKILL.md) | Quasar components, forms, composables, and shared design tokens |
+| [appwrite-patterns](skills/appwrite-patterns/SKILL.md) | Shared clients, authentication boundaries, TablesDB, and permissions |
+| [stacks-clarity](skills/stacks-clarity/SKILL.md) | Contract authorization, escrow, amounts, post-conditions, and Clarinet tests |
+| [boom-project](skills/boom-project/SKILL.md) | Boom-only conventions and a map to its authoritative project instructions |
+
+The reusable stack skills apply to matching projects; `boom-project` applies
+only to a confirmed Boom workspace or an explicit adaptation request. Existing
+rules, hooks, and core/developer profile selections are unchanged. The `full`
+profile includes the module, and both native plugin manifests discover the
+canonical `skills/` directory. This addition does not update an installed plugin
+cache or duplicate skills into the curated `.agents/skills` subset.
+
+Preview the helper module with the existing installer:
+
+```bash
+node scripts/install-apply.js --target codex --modules boom-project-helpers --dry-run
+```
+
+For a managed install, retain your existing profile/module selection and add
+`--with skill:boom-project`. Each of the four `skill:` component selectors resolves
+to the helper module as a group. Use the existing `--skills` selector when only
+one skill is wanted, and inspect the dry-run before applying a changed selection.
 
 ### Hooks
 
