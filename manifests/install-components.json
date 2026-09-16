@@ -119,10 +119,18 @@
     {
       "id": "framework:vue",
       "family": "framework",
-      "description": "Vue.js, Nuxt, Pinia, and Vue Router engineering guidance and rules.",
+      "description": "Vue.js, Pinia, and Vue Router engineering guidance and rules.",
       "modules": [
         "framework-language",
-        "rules-vue",
+        "rules-vue"
+      ]
+    },
+    {
+      "id": "framework:nuxt",
+      "family": "framework",
+      "description": "Nuxt-specific engineering guidance and rules.",
+      "modules": [
+        "framework-language",
         "rules-nuxt"
       ]
     },
