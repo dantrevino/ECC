@@ -9,6 +9,10 @@ model:
   fallback:
     - claude-sonnet-4-6
 skills:
+  - vue-quasar-patterns
+  - appwrite-patterns
+  - stacks-clarity
+  - boom-project
   - agent-architecture-audit
   - agent-eval
   - agent-harness-construction

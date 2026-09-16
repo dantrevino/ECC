@@ -4,9 +4,16 @@
     {
       "id": "baseline:rules",
       "family": "baseline",
-      "description": "Core shared rules and supported language rule packs.",
+      "description": "Core shared rules and supported language rule packs, including the TypeScript-framework rule modules.",
       "modules": [
-        "rules-core"
+        "rules-core",
+        "rules-typescript",
+        "rules-react",
+        "rules-react-native",
+        "rules-vue",
+        "rules-nuxt",
+        "rules-angular",
+        "rules-arkts"
       ]
     },
     {
@@ -52,9 +59,10 @@
     {
       "id": "lang:typescript",
       "family": "language",
-      "description": "TypeScript and frontend/backend application-engineering guidance. Currently resolves through the shared framework-language module.",
+      "description": "TypeScript and frontend/backend application-engineering guidance, plus TypeScript/JavaScript coding-style rules.",
       "modules": [
-        "framework-language"
+        "framework-language",
+        "rules-typescript"
       ]
     },
     {
@@ -84,25 +92,46 @@
     {
       "id": "framework:angular",
       "family": "framework",
-      "description": "Angular-focused engineering guidance and rules. Currently resolves through the shared framework-language module.",
+      "description": "Angular-focused engineering guidance and rules.",
       "modules": [
-        "framework-language"
+        "framework-language",
+        "rules-angular"
       ]
     },
     {
       "id": "framework:react",
       "family": "framework",
-      "description": "React-focused engineering guidance. Currently resolves through the shared framework-language module.",
+      "description": "React-focused engineering guidance and rules.",
       "modules": [
-        "framework-language"
+        "framework-language",
+        "rules-react"
+      ]
+    },
+    {
+      "id": "framework:react-native",
+      "family": "framework",
+      "description": "React Native-focused engineering guidance and rules.",
+      "modules": [
+        "framework-language",
+        "rules-react-native"
       ]
     },
     {
       "id": "framework:vue",
       "family": "framework",
-      "description": "Vue.js, Nuxt, Pinia, and Vue Router engineering guidance. Currently resolves through the shared framework-language module.",
+      "description": "Vue.js, Pinia, and Vue Router engineering guidance and rules.",
       "modules": [
-        "framework-language"
+        "framework-language",
+        "rules-vue"
+      ]
+    },
+    {
+      "id": "framework:nuxt",
+      "family": "framework",
+      "description": "Nuxt-specific engineering guidance and rules.",
+      "modules": [
+        "framework-language",
+        "rules-nuxt"
       ]
     },
     {
@@ -277,9 +306,10 @@
     {
       "id": "lang:arkts",
       "family": "language",
-      "description": "HarmonyOS, ArkTS, and ArkUI development guidance including V2 state management, Navigation routing, and HarmonyOS API best practices.",
+      "description": "HarmonyOS, ArkTS, and ArkUI development guidance including V2 state management, Navigation routing, and HarmonyOS API best practices, plus ArkTS rules.",
       "modules": [
-        "framework-language"
+        "framework-language",
+        "rules-arkts"
       ]
     },
     {
@@ -676,6 +706,38 @@
       "description": "Ukrainian (uk-UA) translated reference docs installed to ~/.claude/docs/uk-UA/.",
       "modules": [
         "docs-uk-ua"
+      ]
+    },
+    {
+      "id": "skill:vue-quasar-patterns",
+      "family": "skill",
+      "description": "Install vue-quasar-patterns through the Boom project helpers module.",
+      "modules": [
+        "boom-project-helpers"
+      ]
+    },
+    {
+      "id": "skill:appwrite-patterns",
+      "family": "skill",
+      "description": "Install appwrite-patterns through the Boom project helpers module.",
+      "modules": [
+        "boom-project-helpers"
+      ]
+    },
+    {
+      "id": "skill:stacks-clarity",
+      "family": "skill",
+      "description": "Install stacks-clarity through the Boom project helpers module.",
+      "modules": [
+        "boom-project-helpers"
+      ]
+    },
+    {
+      "id": "skill:boom-project",
+      "family": "skill",
+      "description": "Install boom-project through the Boom project helpers module.",
+      "modules": [
+        "boom-project-helpers"
       ]
     }
   ]

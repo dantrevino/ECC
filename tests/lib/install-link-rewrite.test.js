@@ -155,7 +155,7 @@ function runTests() {
       sourceRoot: REPO_ROOT,
       homeDir: '/tmp/ecc-link-rewrite-it',
       target: 'claude',
-      moduleIds: ['framework-language', 'rules-core'],
+      moduleIds: ['framework-language', 'rules-core', 'rules-react'],
     });
     const mappings = plan.operations
       .filter(op => op.kind === 'copy-file' && op.sourceRelativePath)

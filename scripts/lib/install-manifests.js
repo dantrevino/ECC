@@ -144,6 +144,13 @@ const LEGACY_LANGUAGE_EXTRA_MODULE_IDS = Object.freeze({
   swift: [],
   typescript: ['framework-language'],
 });
+// Canonical legacy languages whose rules moved out of rules-core into their own
+// module during the TypeScript-framework rules split. Every other canonical
+// legacy language's rules still live in rules-core, already a base module.
+const LEGACY_LANGUAGE_RULE_MODULE_IDS = Object.freeze({
+  arkts: ['rules-arkts'],
+  typescript: ['rules-typescript'],
+});
 const LEGACY_LANGUAGE_RULE_NAMESPACES = Object.freeze({
   c: 'cpp',
   harmonyos: 'arkts',
@@ -527,6 +534,10 @@ function resolveLegacyCompatibilitySelection(options = {}) {
     || LEGACY_COMPAT_BASE_MODULE_IDS_BY_TARGET.claude;
   const moduleIds = dedupeStrings([
     ...baseModuleIds,
+    // Included for every target, antigravity included: its rules are filtered
+    // down to the requested ruleLanguages afterward, but the module has to be
+    // requested before there is anything for that filter to select from.
+    ...canonicalLegacyLanguages.flatMap(language => LEGACY_LANGUAGE_RULE_MODULE_IDS[language] || []),
     ...(target === 'antigravity'
       ? []
       : canonicalLegacyLanguages.flatMap(language => LEGACY_LANGUAGE_EXTRA_MODULE_IDS[language] || [])),

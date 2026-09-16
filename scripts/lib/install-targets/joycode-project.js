@@ -34,7 +34,7 @@ module.exports = createInstallTargetAdapter({
       return paths
         .filter(p => !isForeignPlatformPath(p, adapter.target))
         .flatMap(sourceRelativePath => {
-          if (sourceRelativePath === 'rules') {
+          if (sourceRelativePath === 'rules' || sourceRelativePath.startsWith('rules/')) {
             return createFlatRuleOperations({
               moduleId: module.id,
               repoRoot,

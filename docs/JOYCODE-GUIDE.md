@@ -22,6 +22,12 @@ For a smaller install, select modules explicitly:
 node scripts/install-apply.js --target joycode --modules rules-core,commands-core,workflow-quality
 ```
 
+`rules-core` covers shared and non-TS-framework language rules only. Add the
+TypeScript-framework rule modules you need alongside it — `rules-typescript`,
+`rules-react`, `rules-react-native`, `rules-vue`, `rules-nuxt`,
+`rules-angular`, `rules-arkts` — or select them per language/framework via
+`--with lang:typescript`, `--with framework:vue`, etc.
+
 ## Layout
 
 The project adapter writes managed files under:

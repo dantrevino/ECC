@@ -198,7 +198,13 @@ function runTests() {
     const projectDir = createTempDir('install-apply-project-');
 
     try {
-      const result = run(['typescript', '--enable-hooks'], { cwd: projectDir, homeDir });
+      // Explicit modules rather than the legacy `typescript` request: rules-react
+      // is its own module post-split, and the react-patterns skill this test
+      // checks is not bundled with typescript's rules by default anymore.
+      const result = run(
+        ['--modules', 'framework-language,rules-core,rules-react', '--enable-hooks'],
+        { cwd: projectDir, homeDir }
+      );
       assert.strictEqual(result.code, 0, result.stderr);
 
       const claudeRoot = path.join(homeDir, '.claude');
@@ -344,6 +350,7 @@ function runTests() {
         state.resolution.selectedModules,
         [
           'rules-core',
+          'rules-typescript',
           'agents-core',
           'commands-core',
           'platform-configs',
@@ -492,8 +499,9 @@ function runTests() {
       assert.ok(result.stdout.includes('Profile: core'));
       assert.ok(result.stdout.includes('Included components: (none)'));
       assert.ok(result.stdout.includes(
-        'Selected modules: rules-core, agents-core, commands-core, hooks-runtime, '
-        + 'platform-configs, skill-unified-memory, workflow-quality'
+        'Selected modules: rules-core, rules-typescript, rules-react, rules-react-native, '
+        + 'rules-vue, rules-nuxt, rules-angular, rules-arkts, agents-core, commands-core, '
+        + 'hooks-runtime, platform-configs, skill-unified-memory, workflow-quality'
       ));
       assert.ok(!fs.existsSync(path.join(homeDir, '.claude', 'ecc', 'install-state.json')));
     } finally {
@@ -547,8 +555,9 @@ function runTests() {
       assert.ok(result.stdout.includes('Mode: manifest'));
       assert.ok(result.stdout.includes('Profile: minimal'));
       assert.ok(result.stdout.includes(
-        'Selected modules: rules-core, agents-core, commands-core, platform-configs, '
-        + 'skill-unified-memory, workflow-quality'
+        'Selected modules: rules-core, rules-typescript, rules-react, rules-react-native, '
+        + 'rules-vue, rules-nuxt, rules-angular, rules-arkts, agents-core, commands-core, '
+        + 'platform-configs, skill-unified-memory, workflow-quality'
       ));
       assert.ok(!result.stdout.includes('hooks-runtime'));
       assert.ok(!fs.existsSync(path.join(homeDir, '.claude', 'ecc', 'install-state.json')));
@@ -733,6 +742,13 @@ function runTests() {
         state.resolution.selectedModules,
         [
           'rules-core',
+          'rules-typescript',
+          'rules-react',
+          'rules-react-native',
+          'rules-vue',
+          'rules-nuxt',
+          'rules-angular',
+          'rules-arkts',
           'agents-core',
           'commands-core',
           'platform-configs',
